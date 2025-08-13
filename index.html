@@ -1,33 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
 <meta charset="UTF-8">
-<title>BankID Redirect</title>
+<title>Přesměrování do ČSOB Smart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #009edb, #004b87);
+        color: white;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .container {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        max-width: 400px;
+        width: 90%;
+    }
+    img {
+        max-width: 180px;
+        margin-bottom: 1rem;
+    }
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    p {
+        margin-bottom: 1.5rem;
+    }
+    button {
+        background-color: #ffd200;
+        color: #004b87;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s;
+        font-weight: bold;
+    }
+    button:hover {
+        background-color: #ffcf00;
+    }
+</style>
 <script>
 function redirectNow() {
-    // Extract query string (everything after '?') and fragment (everything after '#')
-    const query = window.location.search; // includes '?', or empty string
-    const fragment = window.location.hash; // includes '#', or empty string
-
-    // Build the target deeplink URL
+    const query = window.location.search;  // includes '?'
+    const fragment = window.location.hash; // includes '#'
     const target = "cz.csob.smart://bankid-callback" + query + fragment;
-
-    // Redirect
-    location.replace(target);
+    window.location.href = target;
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    // Redirect automatically after 1 second
     setTimeout(redirectNow, 1000);
-
-    // Attach click handler to button
     document.getElementById('redirectBtn').addEventListener('click', redirectNow);
 });
 </script>
 </head>
 <body>
-    <h1>Redirecting to BankID…</h1>
-    <p>If you are not redirected automatically, click the button below.</p>
-    <button id="redirectBtn">Return to Smart</button>
+    <div class="container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/CSOB_logo.svg" alt="ČSOB Logo">
+        <h1>Přesměrování do ČSOB Smart</h1>
+        <p>Za okamžik budete přesměrováni. Pokud ne, klikněte na tlačítko níže.</p>
+        <button id="redirectBtn">Otevřít ČSOB Smart</button>
+    </div>
 </body>
 </html>
