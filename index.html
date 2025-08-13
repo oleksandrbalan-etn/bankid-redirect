@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BankID Redirect</title>
+<script>
+function redirectNow() {
+    // Extract query string (everything after '?') and fragment (everything after '#')
+    const query = window.location.search; // includes '?', or empty string
+    const fragment = window.location.hash; // includes '#', or empty string
+
+    // Build the target deeplink URL
+    const target = "cz.csob.smart://bankid-callback" + query + fragment;
+
+    // Redirect
+    window.location.href = target;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    // Redirect automatically after 1 second
+    setTimeout(redirectNow, 1000);
+
+    // Attach click handler to button
+    document.getElementById('redirectBtn').addEventListener('click', redirectNow);
+});
+</script>
+</head>
+<body>
+    <h1>Redirecting to BankID…</h1>
+    <p>If you are not redirected automatically, click the button below.</p>
+    <button id="redirectBtn">Go to BankID</button>
+</body>
+</html>
